@@ -2,12 +2,11 @@
 """
 # @Author : qgc
 # @Time : 2024/11/12 11:28
-# @File : test_main.py
+# @File : test_cli.py
 # Description : 文件说明
 """
-import pytest
 from click.testing import CliRunner
-from cli.main import cli
+from jobtest.cli.cli_main import cli
 
 runner = CliRunner()
 
@@ -40,11 +39,9 @@ def test_run_with_defaults():
 
 def test_run_with_options():
     result = runner.invoke(cli, ['run', 'job_file.yml', '--env', 'dev', '--output', '/logs'])
-    print("Output:", result.output)
-    print("Exit Code:", result.exit_code)
     assert result.exit_code == 0
-    # assert "Running job file: job_file.yml with enviroment:" in result.output
-    # assert "Result will be saved to:" in result.output
+    assert "Running job file: job_file.yml with enviroment:" in result.output
+    assert "Result will be saved to:" in result.output
 
 def test_convert():
     result = runner.invoke(cli, ['convert', 'input.yml', 'output.json'])

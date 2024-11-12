@@ -6,6 +6,7 @@
 # Description : 文件说明
 """
 import click
+from jobtest.cli.init_project import init_project
 
 @click.group()
 @click.version_option(version='0.1.0', prog_name='jobtest')
@@ -63,6 +64,9 @@ def version():
     Display the current version of JobTest.
     """
     click.echo("JobTest version 0.1.0")
+
+# register init_project commands
+cli.add_command(init_project)
 
 if __name__ == '__main__':
     cli()
