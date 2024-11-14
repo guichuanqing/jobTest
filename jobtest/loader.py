@@ -6,6 +6,7 @@
 # Description : 文件说明
 """
 from jobtest.utils.config_loader import load_config
+import logging
 
 # 加载配置文件
 config = load_config()
@@ -16,3 +17,4 @@ def get_log_level():
 
 def get_db_config():
     db_config = config.get('database')
+

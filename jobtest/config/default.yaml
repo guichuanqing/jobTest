@@ -1,4 +1,5 @@
 log_level: INFO
+log_dir: ./logs
 job_timeout: 60
 database:
   host: localhost

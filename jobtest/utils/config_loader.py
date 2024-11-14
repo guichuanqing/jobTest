@@ -53,6 +53,7 @@ def load_config() -> Dict:
         logger.warning(f"No environment-specific configuration found for environment: {current_env}")
     return config
 
+
 def _load_yaml_file(file_path: str) -> Dict:
     """读取并解析YAML配置文件"""
     try:

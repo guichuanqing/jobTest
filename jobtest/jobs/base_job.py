@@ -5,10 +5,10 @@
 # @File : base_job.py
 # Description : 文件说明
 """
-import logging
+from jobtest.utils.logger import Logger
 from typing import Dict, Any
 
-logger = logging.getLogger(__name__)
+logger = Logger().get_logger()
 
 class BaseJob:
     """
