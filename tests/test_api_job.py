@@ -8,7 +8,7 @@
 import pytest
 from unittest.mock import patch
 from jobtest.jobs.api_job import ApiJob
-
+import logging
 
 @pytest.fixture
 def api_job():
@@ -22,16 +22,18 @@ def api_job():
 
 def test_api_job_success(api_job, caplog):
     """测试 API 请求成功的情况"""
-    # 使用 mock 模拟 requests.get 返回的响应
-    with patch("requests.get") as mock_get:
-        mock_get.return_value.status_code = 200
-        mock_get.return_value.json.return_value = {"id": 1, "title": "foo", "body": "bar"}
+    # 临时设置日志级别为 INFO
+    with caplog.at_level(logging.INFO):
+        # 使用 mock 模拟 requests.get 返回的响应
+        with patch("requests.get") as mock_get:
+            mock_get.return_value.status_code = 200
+            mock_get.return_value.json.return_value = {"id": 1, "title": "foo", "body": "bar"}
 
-        api_job.execute()
-        # 验证 Job 的结果是否正确
-        assert api_job.status == "finished"
-        assert api_job.result == {"id": 1, "title": "foo", "body": "bar"}
-        # assert "API test passed" in caplog.text  # 检查日志中是否包含错误信息
+            api_job.execute()
+            # 验证 Job 的结果是否正确
+            assert api_job.status == "finished"
+            assert api_job.result == {"id": 1, "title": "foo", "body": "bar"}
+            assert "API test passed" in caplog.text  # 检查日志中是否包含错误信息
 
 def test_api_job_failure(api_job, caplog):
     """ 测试 API 请求失败的情况 """

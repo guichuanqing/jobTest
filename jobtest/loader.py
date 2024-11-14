@@ -9,8 +9,10 @@ from jobtest.utils.config_loader import load_config
 
 # 加载配置文件
 config = load_config()
-log_level = config.get('log_level')
-db_config = config.get('database')
 
-print(f'Log level: {log_level}')
-print(f'Database config: {db_config}')
+def get_log_level():
+    # 从配置中提取日志级别，默认为 INFO
+    return config.get("log_level", "INFO").upper()
+
+def get_db_config():
+    db_config = config.get('database')
