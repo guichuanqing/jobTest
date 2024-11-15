@@ -8,13 +8,13 @@
 import pytest
 from unittest.mock import patch
 from jobtest.jobs.ui_job import UiJob
-
+import logging
 
 @pytest.fixture
 def ui_job():
     config = {
         "url": "https://www.example.com",
-        "driver_path": "/path/to/chromedriver",
+        "driver_path": "D:\\ProgramData\\Anaconda3\\Scripts\\chromedriver.exe",
         "actions": [
             {"click": "button#submit"},
             {"wait_for": "div#result"}
@@ -22,20 +22,24 @@ def ui_job():
     }
     return UiJob(name="Test UI Job", config=config)
 
+
+
 def test_ui_job_success(ui_job, caplog):
     """测试 UI 测试成功的情况"""
-    # 使用 mock 模拟 WebDriver 的行为
-    with patch("selenium.webdriver.Chrome") as mock_driver:
-        mock_driver_instance = mock_driver.return_value
-        mock_driver_instance.find_element.return_value = mock_driver_instance       # Mock elements
-        mock_driver_instance.find_element_by_css_selector.return_value = mock_driver_instance
+    # 临时设置日志级别为 INFO
+    with caplog.at_level(logging.INFO):
+        # 使用 mock 模拟 WebDriver 的行为
+        with patch("selenium.webdriver.Chrome") as mock_driver:
+            mock_driver_instance = mock_driver.return_value
+            mock_driver_instance.find_element.return_value = mock_driver_instance       # Mock elements
+            mock_driver_instance.find_element_by_css_selector.return_value = mock_driver_instance
 
-        ui_job.execute()
+            ui_job.execute()
 
-        # 验证 Job 的状态
-        assert ui_job.status == "finished"
-        assert "UI test passed" in caplog.text
-
+            # 验证 Job 的状态
+            assert ui_job.status == "finished"
+            assert "UI test passed" in caplog.text
+#
 def test_ui_job_failure(ui_job, caplog):
     """ 测试 UI 测试失败的情况 """
 
@@ -49,7 +53,7 @@ def test_ui_job_failure(ui_job, caplog):
         # 验证 Job 的状态
         assert ui_job.status == "failed"
         assert "UI test failed" in caplog.text  # 检查日志中是否包含失败信息
-
+# #
 def test_ui_job_exception(ui_job, caplog):
     """测试 UI 测试时发生异常的情况"""
     # 使用 mock 模拟 WebDriver 抛出异常

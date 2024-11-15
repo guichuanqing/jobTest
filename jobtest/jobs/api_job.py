@@ -6,11 +6,12 @@
 # Description : 文件说明
 """
 import requests
-import logging
 from typing import Dict, Any
 from jobtest.jobs.base_job import BaseJob
+from jobtest.utils.logger import Logger
 
-logger = logging.getLogger(__name__)
+
+logger = Logger().get_logger()
 
 class ApiJob(BaseJob):
     """API 测试任务，继承自 BaseJob，执行 API 测试逻辑。"""

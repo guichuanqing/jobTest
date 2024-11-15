@@ -1,6 +1,8 @@
 log_level: INFO
 log_dir: ./logs
 job_timeout: 60
+
+driver_path: "D:\\ProgramData\\Anaconda3\\Scripts\\chromedriver.exe"
 database:
   host: localhost
   port: 3306
