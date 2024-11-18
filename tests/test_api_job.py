@@ -7,7 +7,7 @@
 """
 import pytest
 from unittest.mock import patch
-from jobtest.jobs.api_job import ApiJob
+from jobtest.core.api_job import ApiJob
 import logging
 
 @pytest.fixture

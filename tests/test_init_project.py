@@ -33,7 +33,7 @@ def test_init_project(runner, clean_up_project):
 
     # Check if the project directories were created
     assert os.path.isdir('test_project/config')
-    assert os.path.isdir('test_project/jobs')
+    assert os.path.isdir('test_project/core')
     assert os.path.isdir('test_project/logs')
     assert os.path.isdir('test_project/tests')
 
@@ -53,8 +53,8 @@ def test_init_project(runner, clean_up_project):
         assert "log_level: INFO" in f.read()
 
     # Check if the example job was created
-    assert os.path.isfile("test_project/jobs/example_job.py")
-    with open("test_project/jobs/example_job.py", "r") as f:
+    assert os.path.isfile("test_project/core/example_job.py")
+    with open("test_project/core/example_job.py", "r") as f:
         assert "This is an example job." in f.read()
 
     # Check if the example test was created

@@ -26,10 +26,10 @@ def test_startproject_default():
     assert "Creating a new JobTest project" in result.output
 
 def test_startproject_with_path():
-    result = runner.invoke(cli, ['startproject', '/jobs'])
+    result = runner.invoke(cli, ['startproject', '/core'])
     assert result.exit_code == 0
     assert "Creating a new JobTest project" in result.output
-    assert "/jobs" in result.output
+    assert "/core" in result.output
 
 def test_run_with_defaults():
     result = runner.invoke(cli, ['run', 'job_file.yml'])

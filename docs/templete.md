@@ -14,7 +14,7 @@
 /project_name
   ├── config/
   │   ├── config.yaml    # 配置文件
-  ├── jobs/
+  ├── core/
   │   ├── example_job.py # 示例 Job 脚本
   ├── logs/
   │   ├── log.txt        # 日志文件

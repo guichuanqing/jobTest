@@ -2,7 +2,7 @@
 """
 # @Author : qgc
 # @Time : 2024/11/11 18:46
-# @File : base_job.py
+# @File : job.py
 # Description : 文件说明
 """
 import click
@@ -17,7 +17,7 @@ def create_project_structure(project_name):
     """
     project_dir = os.path.join(os.getcwd(), project_name)
     # List of directories to create
-    directories = ['jobs', 'config', 'logs', 'tests']
+    directories = ['core', 'config', 'logs', 'tests']
     # Create directories
     if not os.path.exists(project_dir):
         os.mkdir(project_dir)
@@ -58,13 +58,13 @@ def test_example():
 """)
         click.echo(f"Created example test file: tests/test_example.py.")
         # Example job files
-        job_file = os.path.join(project_dir, 'jobs', 'example_job.py')
+        job_file = os.path.join(project_dir, 'core', 'example_job.py')
         with open(job_file, 'w') as f:
             f.write("""
 def example_job():
     print("This is an example job.")
 """)
-        click.echo(f"Created example job file: jobs/example_job.py.")
+        click.echo(f"Created example job file: core/example_job.py.")
         # config.yaml
         config_file = os.path.join(project_dir, 'config', 'config.yaml')
         with open(config_file, 'w') as f:
